@@ -1,1 +1,142 @@
-<h1>{{title}}</h1>
+<section class="hero is-info is-large">
+    {{!-- bagian head hero --}}
+    {{!-- <div class="hero-head is-bordered" style="border-color: ;">
+
+    </div> --}}
+    <div class="hero-head">
+        <div class="is-centered mb-3 mt-5">
+            <div class="card" style="background-color: blue;">
+                <div class="card-content">
+                    <div class="content">
+                    Lorem ipsum leo risus, porta ac consectetur ac, vestibulum at eros. Donec
+                    id elit non mi porta gravida at eget metus. Cum sociis natoque penatibus
+                    et magnis dis parturient montes, nascetur ridiculus mus. Cras mattis
+                    consectetur purus sit amet fermentum.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="hero-body" style="padding-top: 3rem;">
+        <div class="container">
+            {{!-- <p class="title">Title</p>
+            <p class="subtitle">Subtitle</p> --}}
+
+
+
+            <div class="columns is-centered is-vcentered">
+                <div class="column is-two-thirds">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="content">
+                                <div class="field">
+                                    <label class="label">Nama Lengkap</label>
+                                    <div class="control">
+                                        <input class="input" type="text" placeholder="contoh: Andra Fisher">
+                                    </div>
+                                    <p class="help"></p>
+                                </div>
+                                <div class="field">
+                                    {{!-- asal bisa dari instansi, namun asal mahasiswa --}}
+                                    <label class="label">Asal</label>
+                                    <div class="control">
+                                        <input class="input" type="text" placeholder="">
+                                    </div>
+                                    <p class="help has-text-warning-dark">*) tamu mahasiswa mengisi asal fakultas/jurusan/instansi</p>
+                                </div>
+
+                                <div class="field">
+                                    <label class="label">Keperluan</label>
+                                    <div class="control">
+                                        <input class="input" type="text" placeholder="contoh: konsultasi">
+                                    </div>
+                                    <p class="help"></p>
+                                </div>
+
+                                {{!-- input data orang. --}}
+                                <div class="field">
+                                    <label class="label">Orang Yang dituju</label>
+                                    <div class="control">
+                                        <input class="input" type="text" placeholder="contoh: Eric Wu">
+                                    </div>
+                                    <p class="help"></p>
+                                </div>
+
+                                <div class="field">
+                                    <label class="label">No HP</label>
+                                    <div class="control">
+                                        <input class="input" type="text" placeholder="contoh: 082123456123">
+                                    </div>
+                                    <p class="help has-text-warning-dark">*) gunakan nomor aktif</p>
+                                </div>
+
+                                {{!-- <div class="field">
+                                    <label class="label">Hari Tanggal</label>
+                                    <div class="control">
+                                        <input class="input" type="text" placeholder="contoh: Andra Fisher">
+                                    </div>
+                                    <p class="help">This is a help text</p>
+                                </div> --}}
+
+                                <div class="field">
+                                    <label class="label">Tanda Tangan</label>
+                                    <div class="control">
+                                        <input class="input" type="text" placeholder="contoh: Andra Fisher">
+                                    </div>
+                                    <p class="help">This is a help text</p>
+                                </div>
+
+                                <h1>Tanda Tangan Digital</h1>
+                                    <!-- Elemen HTML untuk menampung area tanda tangan -->
+                                    <div id="signature"></div>
+                                    <button onclick="saveSignature()">Simpan Tanda Tangan</button>
+                                    <button onclick="resetSignature()">Reset Tanda Tangan</button>
+                                <button class="button is-success">Kirim Data</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</section>
+
+
+
+<script>
+    // Inisialisasi JSignature
+    $('#signature').jSignature();
+
+    function saveSignature() {
+        // Mendapatkan data tanda tangan dalam format base64
+        var signatureData = $('#signature').jSignature('getData', 'image');
+        // Kirimkan data tanda tangan ke server
+        $.ajax({
+            url: '/api/signature',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ signatureData: signatureData[1] }),
+            success: function(response) {
+                console.log(response);
+                alert('Tanda tangan disimpan!');
+                // Matikan JSignature setelah tanda tangan disimpan
+                $('#signature').jSignature('clear');
+                $('#signature').jSignature('disable');
+            },
+            error: function(error) {
+                console.error('Error:', error);
+                alert('Gagal menyimpan tanda tangan.');
+            }
+        });
+    }
+
+    function resetSignature() {
+        // Reset tanda tangan
+        $('#signature').jSignature('clear');
+        // Aktifkan kembali JSignature setelah reset
+        $('#signature').jSignature('enable');
+    }
+</script>
