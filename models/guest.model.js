@@ -1,27 +1,41 @@
-import { DataTypes } from 'sequelize';
-import sequelize from '../config/database.js';
+import mongoose from 'mongoose';
 
-const Guest = sequelize.define('guest', {
-    id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
-    },
-    name: {
-        type: DataTypes.STRING(100),
-        allowNull: false
-    },
-    email: {
-        type: DataTypes.STRING(50),
-        allowNull: true
-    },
-    phone: {
-        type: DataTypes.STRING(50),
-        allowNull: true
-    }
-}, {
-    tableName: 'guests',
-    timestamps: true
-});
+const GuestSchema = new mongoose.Schema({
 
-export default Guest;
+    nama_lengkap: {
+        type : String, 
+        required : true,
+        
+    },
+
+    //asal instansi.
+    asal : {
+        type: String,
+        required: true,
+        // unique: true
+    },
+
+    keperluan : {
+        type : String, 
+        required : true,
+    },
+
+    orang_dituju : {
+        type : String, 
+        required : true,
+    },
+
+    no_hp : {
+        type : String, 
+        required : true,
+    },
+    // role: {
+    //     type: String,
+    //     enum: ['admin', 'manager'], // Hanya nilai 'admin' atau 'manager' yang diperbolehkan
+    //     default: 'admin', // Nilai default jika tidak disediakan
+    // },
+    
+}, {timestamps: true});
+
+
+export default mongoose.model('Guest', GuestSchema);

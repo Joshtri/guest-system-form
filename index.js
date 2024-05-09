@@ -5,6 +5,8 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import 'dotenv/config';
 import hbs from 'hbs';
+import connectDB from './config/database.js';
+
 import exphbs from 'express-handlebars';
 // Import router 
 import guestRouter from './routes/guest.router.js';
@@ -25,6 +27,8 @@ const app = express();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+connectDB();
 
 hbs.registerPartials(path.join(__dirname, 'views/partials'),(err)=>{console.log();});
 // Atur mesin tampilan Handlebars sebagai 'hbs'
