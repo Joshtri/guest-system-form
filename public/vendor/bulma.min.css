@@ -2246,7 +2246,7 @@ fieldset[disabled] .button {
 .content h4,
 .content h5,
 .content h6 {
-    color: #363636;
+    /* color: #363636; */
     font-weight: 600;
     line-height: 1.125
 }
@@ -4728,7 +4728,7 @@ fieldset[disabled] .select select:hover {
 }
 
 .label {
-    color: #363636;
+    /* color: #363636; */
     display: block;
     font-size: 1rem;
     font-weight: 700

@@ -2,12 +2,17 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import path from 'path';
+import cors from 'cors';
 import { fileURLToPath } from 'url';
 import 'dotenv/config';
 import hbs from 'hbs';
 import exphbs from 'express-handlebars';
 // Import router 
 import guestRouter from './routes/guest.router.js';
+
+
+import connectDB from './config/database.js';
+
 const app = express();
 
 // Inisialisasi mesin tampilan Handlebars
@@ -23,8 +28,17 @@ const app = express();
 // Tentukan ekstensi file untuk mesin tampilan Handlebars
 // app.engine('.hbs', hbs.engine);
 
+
+
+// Gunakan middleware untuk membaca JSON
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(bodyParser.json());
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+connectDB();
 
 hbs.registerPartials(path.join(__dirname, 'views/partials'),(err)=>{console.log();});
 // Atur mesin tampilan Handlebars sebagai 'hbs'
@@ -36,9 +50,7 @@ app.set('views', path.join(__dirname, 'views'));
 // Gunakan middleware untuk menyajikan file statis dari folder 'public'
 app.use(express.static(path.join(process.cwd(), 'public')));
 
-// Gunakan middleware untuk membaca JSON
-app.use(express.json());
-app.use(bodyParser.json());
+
 
 app.use('/', guestRouter);
 

@@ -1,99 +1,129 @@
-<section class="hero is-info is-large">
+<section class="hero is-info is-large {{#if darkModeEnabled}}has-background-black{{/if}}">
     {{!-- bagian head hero --}}
     {{!-- <div class="hero-head is-bordered" style="border-color: ;">
 
     </div> --}}
-    <div class="hero-head">
-        <div class="is-centered mb-3 mt-5">
-            <div class="card" style="background-color: blue;">
-                <div class="card-content">
-                    <div class="content">
-                    Lorem ipsum leo risus, porta ac consectetur ac, vestibulum at eros. Donec
-                    id elit non mi porta gravida at eget metus. Cum sociis natoque penatibus
-                    et magnis dis parturient montes, nascetur ridiculus mus. Cras mattis
-                    consectetur purus sit amet fermentum.
+    
+        <style>
+        .marquee-container {
+            margin-top: 10px;
+            overflow: hidden;
+            white-space: nowrap;
+            background-color: #f2f2f2; /* Warna latar belakang */
+        }
+
+        .marquee-text {
+            font-weight: bold;
+            font-size: 1.1em;
+            color: #333; /* Warna teks */
+            padding: 5px; /* Padding untuk memisahkan teks dari batas marquee */
+        }
+        .marquee-border-corner{
+              border-radius: 25px;
+
+        }
+        
+                /* Tambahkan gaya untuk menyesuaikan teks di card */
+        .welcome-text {
+            font-size: 1.2em;
+            line-height: 1.5;
+            text-align: justify;
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+    </style>
+<!-- Sertakan jQuery -->
+<!-- Masukkan jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Masukkan JSignature -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jSignature/2.1.3/jSignature.min.js"></script>
+
+        <div class="hero-head {{#if darkModeEnabled}}has-background-black{{/if}}">
+            <div class="container is-max-desktop p-3">
+                <!-- Marquee untuk informasi jam kantor -->
+                <div class="marquee-container">
+                    <marquee behavior="scroll" direction="left" class="marquee-text is-rounded">Jam kantor: Senin - Jumat, 09:00 - 17:00 WITA</marquee>
+                </div>
+                <div class="is-centered mb-3 mt-5">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="content">
+                                <h1 class=" is-3">Selamat Datang</h1>
+                                <hr>
+                        <!-- Ucapan selamat datang -->
+                        <p class="welcome-text">Di pengisian buku tamu online <b>LPPM UNDANA</b>. Kami sangat senang bisa melayani Anda. Harap isi data dengan lengkap dan jangan ragu untuk bertanya jika membutuhkan bantuan.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
             </div>
         </div>
-    </div>
+
 
     <div class="hero-body" style="padding-top: 3rem;">
         <div class="container">
             {{!-- <p class="title">Title</p>
             <p class="subtitle">Subtitle</p> --}}
-
-
-
             <div class="columns is-centered is-vcentered">
                 <div class="column is-two-thirds">
                     <div class="card">
                         <div class="card-content">
-                            <div class="content">
+                            <form id="signature-form" action="/add" method="post" enctype="multipart/form-data">
                                 <div class="field">
-                                    <label class="label">Nama Lengkap</label>
+                                    <label class="label">[<i class="mx-1 fa-regular fa-address-card fa-beat" style="color: #dec054;"></i>]-Nama Lengkap</label>
                                     <div class="control">
-                                        <input class="input" type="text" placeholder="contoh: Andra Fisher">
+                                        <input class="input" type="text" name="nama_lengkap" placeholder="contoh: Andra Fisher">
                                     </div>
-                                    <p class="help"></p>
                                 </div>
                                 <div class="field">
-                                    {{!-- asal bisa dari instansi, namun asal mahasiswa --}}
-                                    <label class="label">Asal</label>
+                                    <label class="label">[<i class="mx-1 fa-solid fa-building" style="color: #ca5858;"></i>]-Asal</label>
                                     <div class="control">
-                                        <input class="input" type="text" placeholder="">
+                                        <input class="input" type="text" name="asal" placeholder="" required>
                                     </div>
                                     <p class="help has-text-warning-dark">*) tamu mahasiswa mengisi asal fakultas/jurusan/instansi</p>
                                 </div>
-
                                 <div class="field">
-                                    <label class="label">Keperluan</label>
+                                    <label class="label">[<i class="mx-1 fa-solid fa-pen-clip"></i>]-Keperluan</label>
                                     <div class="control">
-                                        <input class="input" type="text" placeholder="contoh: konsultasi">
+                                        <input class="input" type="text" name="keperluan" placeholder="contoh: konsultasi" required>
                                     </div>
-                                    <p class="help"></p>
                                 </div>
-
-                                {{!-- input data orang. --}}
                                 <div class="field">
-                                    <label class="label">Orang Yang dituju</label>
+                                    <label class="label">[<i class="mx-1 fa-solid fa-person" style="color: #3caf6a;"></i>]-Orang Yang dituju</label>
                                     <div class="control">
-                                        <input class="input" type="text" placeholder="contoh: Eric Wu">
+                                        <input class="input" type="text" name="orang_dituju" placeholder="contoh: Eric Wu">
                                     </div>
-                                    <p class="help"></p>
                                 </div>
-
                                 <div class="field">
-                                    <label class="label">No HP</label>
+                                    <label class="label">[<i class="mx-1 fa-solid fa-square-phone fa-shake" style="color: #74C0FC;"></i>]-No HP</label>
                                     <div class="control">
-                                        <input class="input" type="text" placeholder="contoh: 082123456123">
+                                        <input class="input" type="text" name="no_hp" placeholder="contoh: 082123456123">
                                     </div>
                                     <p class="help has-text-warning-dark">*) gunakan nomor aktif</p>
                                 </div>
+                                    <!-- Signature Pad -->
 
-                                {{!-- <div class="field">
-                                    <label class="label">Hari Tanggal</label>
-                                    <div class="control">
-                                        <input class="input" type="text" placeholder="contoh: Andra Fisher">
+                                    <div class="field">
+                                        <label class="label">[<i class="fa-solid fa-signature mx-1 fa-beat-fade" style="color: #B197FC;"></i>]-Tanda Tangan Digital</label>
+                                        <div class="control">
+                                            <!-- Elemen HTML untuk menampung area tanda tangan -->
+                                            <div id="signature"></div>
+                                        </div>
                                     </div>
-                                    <p class="help">This is a help text</p>
-                                </div> --}}
+                                    <!-- Tombol untuk mengkonversi tanda tangan menjadi gambar dan menyimpannya -->
 
-                                <div class="field">
-                                    <label class="label">Tanda Tangan</label>
-                                    <div class="control">
-                                        <input class="input" type="text" placeholder="contoh: Andra Fisher">
-                                    </div>
-                                    <p class="help">This is a help text</p>
-                                </div>
 
-                                <h1>Tanda Tangan Digital</h1>
-                                    <!-- Elemen HTML untuk menampung area tanda tangan -->
-                                    <div id="signature"></div>
-                                    <button onclick="saveSignature()">Simpan Tanda Tangan</button>
-                                    <button onclick="resetSignature()">Reset Tanda Tangan</button>
-                                <button class="button is-success">Kirim Data</button>
-                            </div>
+                                    <!-- Elemen input untuk menyimpan gambar tanda tangan -->
+                                    <input type="hidden" name="file" id="" required>
+                                    <!-- Button to Clear Signature -->  
+                                    <button type="button" onclick="resetSignature()" class="button is-warning"><i class="fa-solid fa-arrow-rotate-left fa-spin fa-spin-reverse mx-1" style="color: #ba4a4a;"></i>Reset TTD</button>
+
+
+                                <button type="submit" class="button is-success"><i class="mx-1 fa-solid fa-floppy-disk"></i>Kirim</button>
+                            </form>
+
+
                         </div>
                     </div>
                 </div>
@@ -103,40 +133,86 @@
     </div>
 
 </section>
-
-
-
+ 
+<!-- Script JavaScript -->
 <script>
-    // Inisialisasi JSignature
+    $(document).ready(function() {
+    // Inisialisasi JSignature pada elemen dengan ID 'signature'
     $('#signature').jSignature();
+});
+  // Fungsi untuk mereset tanda tangan
+  function resetSignature() {
+    // Reset tanda tangan
+    $('#signature').jSignature('clear');
+    // Aktifkan kembali JSignature setelah reset
+    $('#signature').jSignature('enable');
+  }
 
-    function saveSignature() {
-        // Mendapatkan data tanda tangan dalam format base64
-        var signatureData = $('#signature').jSignature('getData', 'image');
-        // Kirimkan data tanda tangan ke server
-        $.ajax({
-            url: '/api/signature',
-            type: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify({ signatureData: signatureData[1] }),
-            success: function(response) {
-                console.log(response);
-                alert('Tanda tangan disimpan!');
-                // Matikan JSignature setelah tanda tangan disimpan
-                $('#signature').jSignature('clear');
-                $('#signature').jSignature('disable');
-            },
-            error: function(error) {
-                console.error('Error:', error);
-                alert('Gagal menyimpan tanda tangan.');
-            }
-        });
-    }
 
-    function resetSignature() {
-        // Reset tanda tangan
-        $('#signature').jSignature('clear');
-        // Aktifkan kembali JSignature setelah reset
-        $('#signature').jSignature('enable');
-    }
 </script>
+<!-- Script JavaScript -->
+<script>
+// Di dalam file JavaScript (darkmode.js)
+$(document).ready(function() {
+    var darkModeEnabled = false;
+
+function toggleDarkMode() {
+    darkModeEnabled = !darkModeEnabled;
+    if (darkModeEnabled) {
+        // Mengaktifkan mode gelap
+        $('.hero').addClass('has-background-black');
+        $('.hero-body').addClass('has-background-black');
+        $('.hero-head').addClass('has-background-black');
+        $('.card').addClass('has-background-black'); // Tambahkan kelas untuk mode gelap pada kartu
+        $('.card').css('color', '#fff'); // Warna teks kartu menjadi putih
+        $('.input, .textarea').css('background-color', '#333'); // Warna latar belakang input dan textarea menjadi hitam
+        $('.input, .textarea').css('color', '#fff'); // Warna teks input dan textarea menjadi putih
+        $('::-webkit-input-placeholder').css('color', 'rgba(255, 255, 255, 0.5)'); // Warna placeholder input menjadi putih dengan transparansi
+        $(':-moz-placeholder').css('color', 'rgba(255, 255, 255, )'); // Warna placeholder input menjadi putih dengan transparansi
+        $('::-moz-placeholder').css('color', 'rgba(255, 255, 255, )'); // Warna placeholder input menjadi putih dengan transparansi
+        $(':-ms-input-placeholder').css('color', 'rgba(255, 255, 255,)'); // Warna placeholder input menjadi putih dengan transparansi
+        $('.button').css('background-color', '#333'); // Warna latar belakang tombol menjadi hitam
+        $('.button').css('color', '#fff'); // Warna teks tombol menjadi putih
+        $('nav.navbar').addClass('is-dark'); // Tambahkan kelas untuk mode gelap pada navbar
+        $('.marquee-text').addClass('has-background-black'); // Tambahkan kelas untuk mode gelap pada marquee
+        $('#dark-mode-icon').removeClass('fa-sun'); // Hapus kelas matahari
+        $('#dark-mode-icon').addClass('fa-moon'); // Tambahkan kelas bulan
+        $('.label').css('color', '#fff'); // Tambahkan kelas untuk warna teks putih pada label
+        // Mengaktifkan mode gelap
+        $('.footer').css('background-color', '#333'); // Ganti warna latar belakang footer menjadi hitam
+    } else {
+        // Mengaktifkan mode terang
+        $('.hero').removeClass('has-background-black');
+        $('.hero-body').removeClass('has-background-black');
+        $('.hero-head').removeClass('has-background-black');
+        $('.card').removeClass('has-background-black'); // Hapus kelas untuk mode gelap pada kartu
+        $('.card').css('color', '#333'); // Warna teks kartu menjadi hitam
+        $('.input, .textarea').css('background-color', '#fff'); // Warna latar belakang input dan textarea menjadi putih
+        $('.input, .textarea').css('color', '#333'); // Warna teks input dan textarea menjadi hitam
+        $('::-webkit-input-placeholder').css('color', 'rgba(0, 0, 0, 0.5)'); // Warna placeholder input menjadi hitam dengan transparansi
+        $(':-moz-placeholder').css('color', 'rgba(0, 0, 0, 0.5)'); // Warna placeholder input menjadi hitam dengan transparansi
+        $('::-moz-placeholder').css('color', 'rgba(0, 0, 0, 0.5)'); // Warna placeholder input menjadi hitam dengan transparansi
+        $(':-ms-input-placeholder').css('color', 'rgba(0, 0, 0, 0.5)'); // Warna placeholder input menjadi hitam dengan transparansi
+        $('.button').css('background-color', '#f2f2f2'); // Warna latar belakang tombol menjadi abu-abu muda
+        $('.button').css('color', '#333'); // Warna teks tombol menjadi hitam
+        $('nav.navbar').removeClass('is-dark'); // Hapus kelas untuk mode gelap pada navbar
+        $('.marquee-text').removeClass('has-background-black'); // Hapus kelas untuk mode gelap pada marquee
+        $('#dark-mode-icon').removeClass('fa-moon'); // Hapus kelas bulan
+        $('#dark-mode-icon').addClass('fa-sun'); // Tambahkan kelas matahari
+        $('.label').css('color', '#363636'); // Hapus kelas untuk warna teks putih pada label
+        $('.footer').css('background-color', '#FFF9D0'); // Kembalikan warna latar belakang footer ke warna default
+    }
+}
+
+
+    $('#dark-mode-button').click(function() {
+        toggleDarkMode();
+        // Animasi tombol saat diklik
+        $(this).toggleClass('is-loading');
+        setTimeout(function() {
+            $('#dark-mode-button').removeClass('is-loading');
+        }, 1000); // Ganti 1000 dengan durasi animasi dalam milidetik
+    });
+});
+</script>
+

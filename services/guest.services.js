@@ -1,65 +1,40 @@
+import Guest from '../models/guest.model.js';
 
-import Guest from "../models/guest.model.js";
+const GuestService = {
+    // Fungsi untuk menambahkan tamu baru
+    // async addGuest(guestData) {
+    //     try {
+    //         const newGuest = await Guest.create(guestData);
+    //         return newGuest;
+    //     } catch (error) {
+    //         throw new Error(`Error in adding guest: ${error.message}`);
+    //     }
+    // },
 
-// Fungsi untuk mendapatkan semua tamu
-async function getAllGuests() {
-    try {
-        const guests = await Guest.findAll();
-        return guests;
-    } catch (error) {
-        throw new Error("Gagal mendapatkan data tamu: " + error.message);
-    }
-}
-
-// Fungsi untuk menambahkan tamu baru
-async function addGuest(name, email, phone) {
-    try {
-        const newGuest = await Guest.create({ name, email, phone });
-        return newGuest;
-    } catch (error) {
-        throw new Error("Gagal menambahkan tamu: " + error.message);
-    }
-}
-
-// Fungsi untuk mengambil tamu berdasarkan ID
-async function getGuestById(id) {
-    try {
-        const guest = await Guest.findByPk(id);
-        if (!guest) {
-            throw new Error("Tamu tidak ditemukan");
+    // Fungsi untuk mencari tamu berdasarkan ID
+    async findGuestById(guestId) {
+        try {
+            const guest = await Guest.findById(guestId);
+            if (!guest) {
+                throw new Error("Guest not found");
+            }
+            return guest;
+        } catch (error) {
+            throw new Error(`Error in finding guest: ${error.message}`);
         }
-        return guest;
-    } catch (error) {
-        throw new Error("Gagal mendapatkan data tamu: " + error.message);
-    }
-}
+    },
 
-// Fungsi untuk mengupdate tamu berdasarkan ID
-async function updateGuest(id, newData) {
-    try {
-        const guest = await Guest.findByPk(id);
-        if (!guest) {
-            throw new Error("Tamu tidak ditemukan");
+    // Fungsi untuk mendapatkan semua tamu
+    async getAllGuests() {
+        try {
+            const guests = await Guest.find();
+            return guests;
+        } catch (error) {
+            throw new Error(`Error in fetching guests: ${error.message}`);
         }
-        await guest.update(newData);
-        return guest;
-    } catch (error) {
-        throw new Error("Gagal memperbarui tamu: " + error.message);
     }
-}
 
-// Fungsi untuk menghapus tamu berdasarkan ID
-async function deleteGuest(id) {
-    try {
-        const guest = await Guest.findByPk(id);
-        if (!guest) {
-            throw new Error("Tamu tidak ditemukan");
-        }
-        await guest.destroy();
-        return "Tamu berhasil dihapus";
-    } catch (error) {
-        throw new Error("Gagal menghapus tamu: " + error.message);
-    }
-}
+    // Implementasikan fungsi lainnya seperti updateGuestInfo dan removeGuest
+};
 
-export { getAllGuests, addGuest, getGuestById, updateGuest, deleteGuest };
+export default GuestService;

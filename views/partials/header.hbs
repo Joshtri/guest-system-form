@@ -1,12 +1,12 @@
+<!-- header.handlebars -->
 
-
-<nav class="navbar is-info has-shadow" role="navigation" aria-label="main navigation">
+<nav class="navbar is-dark {{#if darkModeEnabled}}{{/if}}" role="navigation" aria-label="main navigation">
     <div class="container">
         <div class="navbar-brand">
             <a href="#" class="navbar-item">
-                <h2 class="title is-4 has-text-white">Buku Tamu - LPPM UNDANA</h2>
+                <h2 class="title is-4 has-text-white">{{title}}</h2>
             </a>
-            <button class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
+            <button id="dark-mode-toggle" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -14,24 +14,112 @@
         </div>
         <div id="navbarMenu" class="navbar-menu">
             <div class="navbar-end">
+                <!-- Tombol Dark Mode -->
 
-                <a href="/dashboard" class="navbar-item">Beranda</a>
-                <!-- Dropdown Menu -->
-                <!-- <div class="navbar-item has-dropdown is-hoverable">
-                    <a class="navbar-link">Data</a>
-                    <div class="navbar-dropdown">
-                        <a href="/data/data_narapidana" class="navbar-item">Data Narapidana</a>
-                        <a href="/data/data_kriteria" class="navbar-item">Data Kriteria</a>
-                        <a href="/data/data_admin" class="navbar-item">Data Admin</a>
-                        <a href="/data/data_agama" class="navbar-item">Data Agama</a>
-                        <a href="/data/data_pekerjaan" class="navbar-item">Data Pekerjaan</a>
-                        <a href="/admin" class="navbar-item">Data Tindak Pidana</a>
-                        <hr class="navbar-divider">
-                        <a href="#" class="navbar-item">Sign out</a>
+
+                <div class="navbar-item">
+                    <div class="buttons">
+
+                    <a href="/" class="button  is-shadowless is-light">
+                        <strong>Beranda</strong>
+                    </a>
+
+                    <a class="button is-link is-small is-light" id="dark-mode-button">
+                        <i id="dark-mode-icon" class="fas fa-sun"></i> <!-- Default icon matahari -->
+                    </a>
                     </div>
-                </div> -->
-                <!-- <a href="#" class="navbar-item">Perhitungan TOPSIS</a> -->
+                </div>
             </div>
-        </div>
+        </div>               
+
     </div>
 </nav>
+<script>
+// Ambil elemen tombol dan ikon
+var darkModeToggle = document.getElementById('dark-mode-button');
+var darkModeIcon = document.getElementById('dark-mode-icon');
+
+// Tambahkan event listener ke tombol
+darkModeToggle.addEventListener('click', toggleDarkMode);
+
+// Fungsi untuk mengganti mode antara mode gelap dan terang
+function toggleDarkMode() {
+    // Periksa apakah dokumen memiliki kelas 'dark-mode'
+    var hasDarkMode = document.documentElement.classList.contains('dark-mode');
+
+    // Jika sudah dalam mode gelap, hapus kelas 'dark-mode' dan ubah ikon menjadi matahari, jika tidak, tambahkan kelas 'dark-mode' dan ubah ikon menjadi bulan
+    if (hasDarkMode) {
+        document.documentElement.classList.remove('dark-mode');
+        darkModeIcon.classList.remove('fa-moon');
+        darkModeIcon.classList.add('fa-sun');
+    } else {
+        document.documentElement.classList.add('dark-mode');
+        darkModeIcon.classList.remove('fa-sun');
+        darkModeIcon.classList.add('fa-moon');
+    }
+}
+</script>
+
+<!-- Script JavaScript -->
+<script>
+// Di dalam file JavaScript (darkmode.js)
+$(document).ready(function() {
+    var darkModeEnabled = false;
+
+function toggleDarkMode() {
+    darkModeEnabled = !darkModeEnabled;
+    if (darkModeEnabled) {
+        // Mengaktifkan mode gelap
+        $('.hero').addClass('has-background-black');
+        $('.hero-body').addClass('has-background-black');
+        $('.hero-head').addClass('has-background-black');
+        $('.card').addClass('has-background-black'); // Tambahkan kelas untuk mode gelap pada kartu
+        $('.card').css('color', '#fff'); // Warna teks kartu menjadi putih
+        $('.input, .textarea').css('background-color', '#333'); // Warna latar belakang input dan textarea menjadi hitam
+        $('.input, .textarea').css('color', '#fff'); // Warna teks input dan textarea menjadi putih
+        $('::-webkit-input-placeholder').css('color', 'rgba(255, 255, 255, 0.5)'); // Warna placeholder input menjadi putih dengan transparansi
+        $(':-moz-placeholder').css('color', 'rgba(255, 255, 255, )'); // Warna placeholder input menjadi putih dengan transparansi
+        $('::-moz-placeholder').css('color', 'rgba(255, 255, 255, )'); // Warna placeholder input menjadi putih dengan transparansi
+        $(':-ms-input-placeholder').css('color', 'rgba(255, 255, 255,)'); // Warna placeholder input menjadi putih dengan transparansi
+        $('.button').css('background-color', '#333'); // Warna latar belakang tombol menjadi hitam
+        $('.button').css('color', '#fff'); // Warna teks tombol menjadi putih
+        $('nav.navbar').addClass('is-dark'); // Tambahkan kelas untuk mode gelap pada navbar
+        $('.marquee-text').addClass('has-background-black'); // Tambahkan kelas untuk mode gelap pada marquee
+        $('#dark-mode-icon').removeClass('fa-sun'); // Hapus kelas matahari
+        $('#dark-mode-icon').addClass('fa-moon'); // Tambahkan kelas bulan
+        $('.label').css('color', '#fff'); // Tambahkan kelas untuk warna teks putih pada label
+    } else {
+        // Mengaktifkan mode terang
+        $('.hero').removeClass('has-background-black');
+        $('.hero-body').removeClass('has-background-black');
+        $('.hero-head').removeClass('has-background-black');
+        $('.card').removeClass('has-background-black'); // Hapus kelas untuk mode gelap pada kartu
+        $('.card').css('color', '#333'); // Warna teks kartu menjadi hitam
+        $('.input, .textarea').css('background-color', '#fff'); // Warna latar belakang input dan textarea menjadi putih
+        $('.input, .textarea').css('color', '#333'); // Warna teks input dan textarea menjadi hitam
+        $('::-webkit-input-placeholder').css('color', 'rgba(0, 0, 0, 0.5)'); // Warna placeholder input menjadi hitam dengan transparansi
+        $(':-moz-placeholder').css('color', 'rgba(0, 0, 0, 0.5)'); // Warna placeholder input menjadi hitam dengan transparansi
+        $('::-moz-placeholder').css('color', 'rgba(0, 0, 0, 0.5)'); // Warna placeholder input menjadi hitam dengan transparansi
+        $(':-ms-input-placeholder').css('color', 'rgba(0, 0, 0, 0.5)'); // Warna placeholder input menjadi hitam dengan transparansi
+        $('.button').css('background-color', '#f2f2f2'); // Warna latar belakang tombol menjadi abu-abu muda
+        $('.button').css('color', '#333'); // Warna teks tombol menjadi hitam
+        $('nav.navbar').removeClass('is-dark'); // Hapus kelas untuk mode gelap pada navbar
+        $('.marquee-text').removeClass('has-background-black'); // Hapus kelas untuk mode gelap pada marquee
+        $('#dark-mode-icon').removeClass('fa-moon'); // Hapus kelas bulan
+        $('#dark-mode-icon').addClass('fa-sun'); // Tambahkan kelas matahari
+        $('.label').css('color', '#363636'); // Hapus kelas untuk warna teks putih pada label
+    }
+}
+
+    $('#dark-mode-button').click(function() {
+        toggleDarkMode();
+        // Animasi tombol saat diklik
+        $(this).toggleClass('is-loading');
+        setTimeout(function() {
+            $('#dark-mode-button').removeClass('is-loading');
+        }, 1000); // Ganti 1000 dengan durasi animasi dalam milidetik
+    });
+});
+</script>
+
+

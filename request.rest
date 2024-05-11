@@ -1,0 +1,10 @@
+POST http://localhost:3000/add
+Content-Type: application/json
+
+{
+    "nama_lengkap": "John Doe",
+    "asal": "Contoh Instansi",
+    "keperluan": "Meeting",
+    "orang_dituju": "Jane Smith",
+    "no_hp": "08123456789"
+}

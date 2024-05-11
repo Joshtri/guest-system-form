@@ -1,37 +1,33 @@
 import express from 'express';
-import {
-    getAllGuests,
-    // addGuest,
-    // getGuestById,
-    // updateGuest,
-    // deleteGuest
-} from '../controllers/guest.controller.js';
+import GuestController from '../controllers/guest.controller.js';
+import {upload} from '../config/uploadSign.js'; // Sesuaikan dengan path modul Anda
 
 const router = express.Router();
 
-// Endpoint untuk mendapatkan semua tamu
-router.get('/guests', async (req, res) => {
-    await getAllGuests(req, res);
-});
+// Rute untuk menambahkan tamu baru
+router.post('/add',upload, GuestController.addGuest);
 
-// // Endpoint untuk menambahkan tamu baru
-// router.post('/guests', async (req, res) => {
-//     await addGuest(req, res);
+
+// Rute untuk mencari tamu berdasarkan ID
+router.get('/:id', GuestController.findGuestById);
+
+// Rute untuk mendapatkan semua tamu
+router.get('/', GuestController.getAllGuests);
+
+
+// Menambahkan rute untuk menyimpan tanda tangan
+// router.post('/save-signature', async (req, res) => {
+//     try {
+//         const { signatureData } = req.body;
+//         // Simpan data tanda tangan ke database
+//         const newSignature = await Signature.create({ imageData: signatureData });
+//         res.status(200).send('Tanda tangan berhasil disimpan.');
+//     } catch (error) {
+//         console.error('Error:', error);
+//         res.status(500).send('Terjadi kesalahan saat menyimpan tanda tangan.');
+//     }
 // });
 
-// // Endpoint untuk mendapatkan tamu berdasarkan ID
-// router.get('/guests/:id', async (req, res) => {
-//     await getGuestById(req, res);
-// });
-
-// // Endpoint untuk memperbarui tamu berdasarkan ID
-// router.put('/guests/:id', async (req, res) => {
-//     await updateGuest(req, res);
-// });
-
-// // Endpoint untuk menghapus tamu berdasarkan ID
-// router.delete('/guests/:id', async (req, res) => {
-//     await deleteGuest(req, res);
-// });
+// Anda dapat menambahkan rute lainnya di sini untuk operasi lain seperti update dan delete
 
 export default router;
