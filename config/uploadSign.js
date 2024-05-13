@@ -9,7 +9,7 @@ const uploadMultiple = multer({
   limits: fileLimit,
   fileFilter: (req, file, cb) => {
     checkFileType(file, cb);
-  }
+  } 
 }).array("file", 12);
 
 const upload = multer({
