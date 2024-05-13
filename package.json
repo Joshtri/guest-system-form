@@ -5,7 +5,7 @@
   "type": "module",
   "license": "MIT",
   "scripts": {
-    "start": "index.js",
+    "start": "node index.js",
     "dev": " nodemon index.js",
     "lint": "eslint ."
   },
