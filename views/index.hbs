@@ -4,39 +4,44 @@
 
     </div> --}}
     
-        <style>
-        .marquee-container {
-            margin-top: 10px;
-            overflow: hidden;
-            white-space: nowrap;
-            background-color: #f2f2f2; /* Warna latar belakang */
-        }
-
-        .marquee-text {
-            font-weight: bold;
-            font-size: 1.1em;
-            color: #333; /* Warna teks */
-            padding: 5px; /* Padding untuk memisahkan teks dari batas marquee */
-        }
-        .marquee-border-corner{
-              border-radius: 25px;
-
-        }
-        
-                /* Tambahkan gaya untuk menyesuaikan teks di card */
-        .welcome-text {
-            font-size: 1.2em;
-            line-height: 1.5;
-            text-align: justify;
-            margin-top: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-    </style>
+    <link rel="stylesheet" href="/css/marquee.css">
 <!-- Sertakan jQuery -->
 <!-- Masukkan jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- Masukkan JSignature -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jSignature/2.1.3/jSignature.min.js"></script>
+{{!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jSignature/2.1.3/jSignature.min.js"></script> --}}
+
+
+<style>
+    .notification.is-fixed {
+        position: fixed;
+        top: 70px; /* Atur jarak dari bagian atas */
+        left: calc(50% - 300px); /* Atur jarak dari tepi kiri, misalnya notifikasi berlebar 600px */
+        z-index: 1000; /* Pastikan notifikasi muncul di atas elemen lain */
+    }
+
+    /* Media query untuk tampilan mobile */
+    @media only screen and (max-width: 600px) {
+        .notification.is-fixed {
+            top: 70px; /* Ubah jarak dari bagian atas untuk tampilan mobile */
+            left: calc(50% - 150px); /* Atur jarak dari tepi kiri untuk tampilan mobile */
+            width: auto; /* Atur lebar notifikasi agar dapat menyesuaikan konten */
+            max-width: 90%; /* Batasi lebar maksimum notifikasi untuk tampilan mobile */
+            
+         
+        }
+    }
+</style>
+
+        {{#each messageSuccessGuest}}
+            <div class="notification is-success mx-auto is-fixed animate__animated animate__fadeInDown" style="width: 600px;">
+                <p><strong>{{this}}</strong></p>
+                <button class="delete" onclick="closeNotification(this)"></button>
+            </div>
+        {{/each}}
+
+
+
 
         <div class="hero-head {{#if darkModeEnabled}}has-background-black{{/if}}">
             <div class="container is-max-desktop p-3">
@@ -60,9 +65,21 @@
             </div>
         </div>
 
+ 
+
+        <script>
+            function closeNotification(button) {
+                // Mendapatkan parent dari tombol delete, yaitu notifikasi
+                var notification = button.parentNode;
+                // Menghapus notifikasi
+                notification.remove();
+            }
+        </script>
+
 
     <div class="hero-body" style="padding-top: 3rem;">
         <div class="container">
+            
             {{!-- <p class="title">Title</p>
             <p class="subtitle">Subtitle</p> --}}
             <div class="columns is-centered is-vcentered">
@@ -107,112 +124,121 @@
                                     <div class="field">
                                         <label class="label">[<i class="fa-solid fa-signature mx-1 fa-beat-fade" style="color: #B197FC;"></i>]-Tanda Tangan Digital</label>
                                         <div class="control">
+                                            {{!-- <input type="file" name="signature_image" class="input" id="signature_image_input" style="display: none;"> --}}
+
+                                            <div id="signature_image_input" class="file has-name" style="display: none;">
+                                                <label class="file-label">
+                                                    <input class="file-input"  type="file" name="file" />
+                                                    <span class="file-cta">
+                                                    <span class="file-icon">
+                                                        <i class="fas fa-upload"></i>
+                                                    </span>
+                                                    <span class="file-label"> Choose a file… </span>
+                                                    </span>
+                                                    <span class="file-name"> Upload TTD yang sudah diunduh</span>
+                                                </label>
+                                            </div>
+                                            <p class="help has-text-warning-dark" id="signature_img_keterangan" style="display: none;">*) Upload tanda tangan yang telah di unduh pada kolom diatas 👆👆</p> 
+
+                                            <script>
+                                            const fileInput = document.querySelector("#signature_image_input input[type=file]");
+                                            fileInput.onchange = () => {
+                                                if (fileInput.files.length > 0) {
+                                                const fileName = document.querySelector("#signature_image_input .file-name");
+                                                fileName.textContent = fileInput.files[0].name;
+                                                }
+                                            };
+                                            </script>
                                             <!-- Elemen HTML untuk menampung area tanda tangan -->
                                             <div id="signature"></div>
+                                            
                                         </div>
                                     </div>
                                     <!-- Tombol untuk mengkonversi tanda tangan menjadi gambar dan menyimpannya -->
 
 
                                     <!-- Elemen input untuk menyimpan gambar tanda tangan -->
-                                    <input type="hidden" name="file" id="" required>
-                                    <!-- Button to Clear Signature -->  
-                                    <button type="button" onclick="resetSignature()" class="button is-warning"><i class="fa-solid fa-arrow-rotate-left fa-spin fa-spin-reverse mx-1" style="color: #ba4a4a;"></i>Reset TTD</button>
+                                    {{!-- <input type="hidden" name="file" id="file" required> --}}
 
+                                <!-- Input file yang tersembunyi -->
+
+
+                                
+                                    <button type="button" onclick="resetSignature()" class="button is-warning"><i class="fa-solid fa-arrow-rotate-left fa-spin fa-spin-reverse mx-1" style="color: #ba4a4a;"></i>Reset TTD</button>
+                                    <button type="button" onclick="downloadSignature()" class="button is-success" id="downloadBtn" style="display: none;">Unduh TTD</button>
+                               
 
                                 <button type="submit" class="button is-success"><i class="mx-1 fa-solid fa-floppy-disk"></i>Kirim</button>
                             </form>
-
-
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 
 </section>
  
-<!-- Script JavaScript -->
-<script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jSignature/2.1.3/jSignature.min.js"></script>
+    <script>
     $(document).ready(function() {
-    // Inisialisasi JSignature pada elemen dengan ID 'signature'
-    $('#signature').jSignature();
-});
-  // Fungsi untuk mereset tanda tangan
-  function resetSignature() {
-    // Reset tanda tangan
-    $('#signature').jSignature('clear');
-    // Aktifkan kembali JSignature setelah reset
-    $('#signature').jSignature('enable');
-  }
+        $('#signature').jSignature({
+            'decor-color': 'transparent',
+            'background-color': 'transparent'
+        });
 
-
-</script>
-<!-- Script JavaScript -->
-<script>
-// Di dalam file JavaScript (darkmode.js)
-$(document).ready(function() {
-    var darkModeEnabled = false;
-
-function toggleDarkMode() {
-    darkModeEnabled = !darkModeEnabled;
-    if (darkModeEnabled) {
-        // Mengaktifkan mode gelap
-        $('.hero').addClass('has-background-black');
-        $('.hero-body').addClass('has-background-black');
-        $('.hero-head').addClass('has-background-black');
-        $('.card').addClass('has-background-black'); // Tambahkan kelas untuk mode gelap pada kartu
-        $('.card').css('color', '#fff'); // Warna teks kartu menjadi putih
-        $('.input, .textarea').css('background-color', '#333'); // Warna latar belakang input dan textarea menjadi hitam
-        $('.input, .textarea').css('color', '#fff'); // Warna teks input dan textarea menjadi putih
-        $('::-webkit-input-placeholder').css('color', 'rgba(255, 255, 255, 0.5)'); // Warna placeholder input menjadi putih dengan transparansi
-        $(':-moz-placeholder').css('color', 'rgba(255, 255, 255, )'); // Warna placeholder input menjadi putih dengan transparansi
-        $('::-moz-placeholder').css('color', 'rgba(255, 255, 255, )'); // Warna placeholder input menjadi putih dengan transparansi
-        $(':-ms-input-placeholder').css('color', 'rgba(255, 255, 255,)'); // Warna placeholder input menjadi putih dengan transparansi
-        $('.button').css('background-color', '#333'); // Warna latar belakang tombol menjadi hitam
-        $('.button').css('color', '#fff'); // Warna teks tombol menjadi putih
-        $('nav.navbar').addClass('is-dark'); // Tambahkan kelas untuk mode gelap pada navbar
-        $('.marquee-text').addClass('has-background-black'); // Tambahkan kelas untuk mode gelap pada marquee
-        $('#dark-mode-icon').removeClass('fa-sun'); // Hapus kelas matahari
-        $('#dark-mode-icon').addClass('fa-moon'); // Tambahkan kelas bulan
-        $('.label').css('color', '#fff'); // Tambahkan kelas untuk warna teks putih pada label
-        // Mengaktifkan mode gelap
-        $('.footer').css('background-color', '#333'); // Ganti warna latar belakang footer menjadi hitam
-    } else {
-        // Mengaktifkan mode terang
-        $('.hero').removeClass('has-background-black');
-        $('.hero-body').removeClass('has-background-black');
-        $('.hero-head').removeClass('has-background-black');
-        $('.card').removeClass('has-background-black'); // Hapus kelas untuk mode gelap pada kartu
-        $('.card').css('color', '#333'); // Warna teks kartu menjadi hitam
-        $('.input, .textarea').css('background-color', '#fff'); // Warna latar belakang input dan textarea menjadi putih
-        $('.input, .textarea').css('color', '#333'); // Warna teks input dan textarea menjadi hitam
-        $('::-webkit-input-placeholder').css('color', 'rgba(0, 0, 0, 0.5)'); // Warna placeholder input menjadi hitam dengan transparansi
-        $(':-moz-placeholder').css('color', 'rgba(0, 0, 0, 0.5)'); // Warna placeholder input menjadi hitam dengan transparansi
-        $('::-moz-placeholder').css('color', 'rgba(0, 0, 0, 0.5)'); // Warna placeholder input menjadi hitam dengan transparansi
-        $(':-ms-input-placeholder').css('color', 'rgba(0, 0, 0, 0.5)'); // Warna placeholder input menjadi hitam dengan transparansi
-        $('.button').css('background-color', '#f2f2f2'); // Warna latar belakang tombol menjadi abu-abu muda
-        $('.button').css('color', '#333'); // Warna teks tombol menjadi hitam
-        $('nav.navbar').removeClass('is-dark'); // Hapus kelas untuk mode gelap pada navbar
-        $('.marquee-text').removeClass('has-background-black'); // Hapus kelas untuk mode gelap pada marquee
-        $('#dark-mode-icon').removeClass('fa-moon'); // Hapus kelas bulan
-        $('#dark-mode-icon').addClass('fa-sun'); // Tambahkan kelas matahari
-        $('.label').css('color', '#363636'); // Hapus kelas untuk warna teks putih pada label
-        $('.footer').css('background-color', '#FFF9D0'); // Kembalikan warna latar belakang footer ke warna default
-    }
-}
-
-
-    $('#dark-mode-button').click(function() {
-        toggleDarkMode();
-        // Animasi tombol saat diklik
-        $(this).toggleClass('is-loading');
-        setTimeout(function() {
-            $('#dark-mode-button').removeClass('is-loading');
-        }, 1000); // Ganti 1000 dengan durasi animasi dalam milidetik
+        // Memunculkan tombol "Unduh TTD" saat pengguna baru menggambar tanda tangan
+        $('#signature').on('change', function() {
+            $('#downloadBtn').show();
+        });
     });
-});
-</script>
+
+    function resetSignature() {
+        $('#signature').jSignature('clear');
+        $('#signature').jSignature('enable');
+        $('#downloadBtn').hide(); // Sembunyikan tombol "Unduh TTD" setelah mereset tanda tangan
+    }
+
+    function downloadSignature() {
+        var $sigdiv = $("#signature");
+        var datapair = $sigdiv.jSignature("getData", "svg");
+        var svgData = datapair[1];
+
+        // Buat elemen <canvas> untuk menggambar SVG
+        var canvas = document.createElement("canvas");
+        var ctx = canvas.getContext("2d");
+        var img = new Image();
+
+        img.onload = function() {
+            // Atur ukuran canvas sesuai dengan gambar
+            canvas.width = img.width;
+            canvas.height = img.height;
+
+            // Gambar SVG di atas canvas
+            ctx.drawImage(img, 0, 0);
+
+            // Dapatkan URL data PNG dari canvas
+            var pngData = canvas.toDataURL("image/png");
+
+            // Buat tautan unduh untuk gambar PNG
+            var a = $("<a style='display: none;' href='" + pngData + "' download='signature.png'>download</a>");
+            $("body").append(a);
+            a[0].click();
+            a.remove();
+
+            // Tampilkan input file setelah mengunduh tanda tangan
+            $('#signature_image_input').show();
+
+            // tampilkan keterangan signature image
+            $('#signature_img_keterangan').show();
+            // Sembunyikan tombol "Unduh TTD" setelah mengunduh tanda tangan
+            $('#downloadBtn').hide();
+        };
+
+        img.src = "data:image/svg+xml;base64," + btoa(svgData);
+    }
+
+    </script>
+<!-- Script JavaScript -->
+<script src="/js/darkMode.js"></script>
 

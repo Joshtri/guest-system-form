@@ -1,23 +1,4 @@
-<footer class="footer" style="background-color: #b4b2a4;">
-  <div class="content has-text-centered">
-    <p>
-      <img src="/img/ilkom-logo.png" alt="Logo Instansi 1" style="height:130px ;width:130px" class="logo">
-      <img src="/img/unc_logo.png" alt="Logo Instansi 1" style="height:130px ;width:130px" class="logo">
-      <img src="/img/chipset_logo.png" style="height:130px ;width:130px" alt="Logo Instansi 2" class="logo">
-    </p>
-    <p>
-      Copyright © <span id="current-year"></span> Chipset.
-    </p>
-  </div>
-</footer>
-
-<script>
-  document.getElementById('current-year').textContent = new Date().getFullYear();
-</script>
-
-
-
-<script>
+/* eslint-disable no-undef */
 // Di dalam file JavaScript (darkmode.js)
 $(document).ready(function() {
     var darkModeEnabled = false;
@@ -80,5 +61,3 @@ function toggleDarkMode() {
         }, 1000); // Ganti 1000 dengan durasi animasi dalam milidetik
     });
 });
-</script>
-

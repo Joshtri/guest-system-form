@@ -1,0 +1,26 @@
+.marquee-container {
+    margin-top: 10px;
+    overflow: hidden;
+    white-space: nowrap;
+    background-color: #f2f2f2; /* Warna latar belakang */
+}
+
+.marquee-text {
+    font-weight: bold;
+    font-size: 1.1em;
+    color: #333; /* Warna teks */
+    padding: 5px; /* Padding untuk memisahkan teks dari batas marquee */
+}
+.marquee-border-corner{
+      border-radius: 25px;
+
+}
+
+        /* Tambahkan gaya untuk menyesuaikan teks di card */
+.welcome-text {
+    font-size: 1.2em;
+    line-height: 1.5;
+    text-align: justify;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+}

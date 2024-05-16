@@ -3,6 +3,10 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import path from 'path';
 import cors from 'cors';
+import flash from 'connect-flash';
+import session from 'express-session';
+
+// session
 import { fileURLToPath } from 'url';
 import 'dotenv/config';
 import hbs from 'hbs';
@@ -28,7 +32,20 @@ const app = express();
 // Tentukan ekstensi file untuk mesin tampilan Handlebars
 // app.engine('.hbs', hbs.engine);
 
+// Express Session
+app.use(
+    session({
+      proxy: true,
+      secret: 'secret',
+      resave: false,
+      saveUninitialized: true,
+    //   name: 'top-up-game',
+    
+      
+    })
+);
 
+app.use(flash({ sessionKeyName: 'flashMessage' }));
 
 // Gunakan middleware untuk membaca JSON
 app.use(express.urlencoded({ extended: true }));

@@ -59,10 +59,10 @@ const GuestController = {
 
     
         try {
-            // const file = {
-            //     type: req.file.mimetype,
-            //     buffer: req.file.buffer,
-            // };
+            const file = {
+                type: req.file.mimetype,
+                buffer: req.file.buffer,
+            };
         
             const itemData = {
                 nama_lengkap: req.body.nama_lengkap,
@@ -72,8 +72,9 @@ const GuestController = {
                 no_hp: req.body.no_hp,
             };
             // Memanggil fungsi untuk mengunggah file dan menyimpan data teks
-            const buildImage = await uploadImage( itemData, 'single'); // Sesuaikan 'single' atau 'multiple' sesuai logika Anda
+            const buildImage = await uploadImage(file,itemData, 'single'); // Sesuaikan 'single' atau 'multiple' sesuai logika Anda
     
+            await req.flash('infoAddGuest','Data Tamu Berhasil Ditambahkan ✅✅✅');
             // res.send('berhasil tambah data tamu');
             res.redirect('/');
         } catch (error) {
@@ -96,12 +97,15 @@ const GuestController = {
     // Controller untuk mendapatkan semua tamu
     async getAllGuests(req, res) {
         try {
-            const guests = await GuestService.getAllGuests();
+            // const guests = await GuestService.getAllGuests();
             // res.json(guests);
+
             title = "Pengisian Buku Tamu";
+            const messageSuccessGuest =  req.flash('infoAddGuest');
 
             res.render('index',{
-                guests,
+                // guests,
+                messageSuccessGuest,
                 title
             });
         } catch (error) {
