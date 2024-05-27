@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geolocation Example</title>
+</head>
+<body>
+    <h1>Geolocation Example</h1>
+    <button onclick="getLocation()">Get Location</button>
+
+    <script>
+        // Koordinat wilayah yang diizinkan
+        const allowedLatitude = -10.155006;
+        const allowedLongitude = 123.66347;
+
+        // Fungsi untuk mendapatkan koordinat geografis pengguna
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+                console.error("Geolocation is not supported by this browser.");
+            }
+        }
+
+        // Fungsi yang dipanggil saat koordinat geografis berhasil diperoleh
+        function showPosition(position) {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+            console.log("Latitude: " + latitude + " Longitude: " + longitude);
+            
+            // Lakukan pembandingan dengan koordinat wilayah yang diizinkan di sini
+            if (latitude === allowedLatitude && longitude === allowedLongitude) {
+                // Berikan akses ke konten karena pengguna berada di wilayah yang diizinkan
+                console.log("Akses Diizinkan");
+                // Lakukan tindakan lain di sini, misalnya, lanjutkan ke halaman selanjutnya
+            } else {
+                // Tolak akses ke konten karena pengguna tidak berada di wilayah yang diizinkan
+                console.log("Akses Ditolak");
+                // Tampilkan pesan atau arahkan pengguna ke halaman lain
+            }
+        }
+    </script>
+</body>
+</html>
