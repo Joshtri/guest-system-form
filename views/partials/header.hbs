@@ -1,12 +1,15 @@
 <!-- header.handlebars -->
 
+<!-- header.handlebars -->
+
 <nav class="navbar is-dark {{#if darkModeEnabled}}{{/if}}" role="navigation" aria-label="main navigation">
     <div class="container">
         <div class="navbar-brand">
             <a href="#" class="navbar-item">
                 <h2 class="title is-4 has-text-white">{{title}}</h2>
             </a>
-            <button id="dark-mode-toggle" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
+            <!-- Navbar toggle button -->
+            <button class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -14,26 +17,46 @@
         </div>
         <div id="navbarMenu" class="navbar-menu">
             <div class="navbar-end">
-                <!-- Tombol Dark Mode -->
-
-
+                <!-- Navbar items -->
                 <div class="navbar-item">
                     <div class="buttons">
-
-                    <a href="/" class="button  is-shadowless is-light">
-                        <strong>Beranda</strong>
-                    </a>
-
-                    <a class="button is-link is-small is-light" id="dark-mode-button">
-                        <i id="dark-mode-icon" class="fas fa-sun"></i> <!-- Default icon matahari -->
-                    </a>
+                        <a href="/" class="button is-shadowless is-light">
+                            <strong>Beranda</strong>
+                        </a>
+                        <a class="button is-link is-small is-light" id="dark-mode-button">
+                            <i id="dark-mode-icon" class="fas fa-sun"></i> <!-- Default icon matahari -->
+                        </a>
                     </div>
                 </div>
             </div>
         </div>               
-
     </div>
 </nav>
+
+<script>
+    // Initialize Bulma Navbar component
+    document.addEventListener('DOMContentLoaded', function () {
+        // Get all "navbar-burger" elements
+        var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+        // Check if there are any navbar burgers
+        if ($navbarBurgers.length > 0) {
+            // Add a click event on each of them
+            $navbarBurgers.forEach(function ($el) {
+                $el.addEventListener('click', function () {
+                    // Get the target from the "data-target" attribute
+                    var target = $el.dataset.target;
+                    var $target = document.getElementById(target);
+
+                    // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+                    $el.classList.toggle('is-active');
+                    $target.classList.toggle('is-active');
+                });
+            });
+        }
+    });
+</script>
+
 <script>
 // Ambil elemen tombol dan ikon
 var darkModeToggle = document.getElementById('dark-mode-button');
