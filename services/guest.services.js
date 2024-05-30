@@ -11,19 +11,6 @@ const GuestService = {
     }
   },
 
-  // Fungsi untuk mencari tamu berdasarkan ID
-  async findGuestById(guestId) {
-    try {
-      const guest = await Guest.findById(guestId);
-      if (!guest) {
-        throw new Error("Guest not found");
-      }
-      return guest;
-    } catch (error) {
-      throw new Error(`Error in finding guest: ${error.message}`);
-    }
-  },
-
   // Fungsi untuk mendapatkan semua tamu
   async getAllGuests() {
     try {
@@ -34,7 +21,6 @@ const GuestService = {
     }
   },
 
-  // Implementasikan fungsi lainnya seperti updateGuestInfo dan removeGuest
 };
 
 export default GuestService;
