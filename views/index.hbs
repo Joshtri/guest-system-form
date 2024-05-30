@@ -148,18 +148,6 @@
                                         {{!-- <input type="file" name="signature_image" class="input"
                                             id="signature_image_input" style="display: none;"> --}}
 
-                                        <div id="signature_image_input" class="file has-name" style="display: none;">
-                                            <label class="file-label">
-                                                <input class="file-input" type="file" name="file" />
-                                                <span class="file-cta">
-                                                    <span class="file-icon">
-                                                        <i class="fas fa-upload"></i>
-                                                    </span>
-                                                    <span class="file-label"> Choose a file… </span>
-                                                </span>
-                                                <span class="file-name"> Upload TTD yang sudah diunduh</span>
-                                            </label>
-                                        </div>
                                         <p class="help has-text-warning-dark" id="signature_img_keterangan"
                                             style="display: none;">*) Upload tanda tangan yang telah di unduh pada kolom
                                             diatas 👆👆</p>
@@ -192,8 +180,8 @@
                                 <button type="button" onclick="resetSignature()" class="button is-warning"><i
                                         class="fa-solid fa-arrow-rotate-left fa-spin fa-spin-reverse mx-1"
                                         style="color: #ba4a4a;"></i>Reset TTD</button>
-                                <button type="button" onclick="downloadSignature()" class="button is-success"
-                                    id="downloadBtn" style="display: none;">Unduh TTD</button>
+                                {{!-- <button type="button" onclick="downloadSignature()" class="button is-success"
+                                    id="downloadBtn" style="display: none;">Unduh TTD</button> --}}
 
 
                                 <button type="submit" class="button is-success"><i
