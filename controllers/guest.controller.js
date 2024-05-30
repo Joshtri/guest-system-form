@@ -97,7 +97,7 @@ const GuestController = {
   },
 
   // Controller untuk mendapatkan semua tamu
-  async getAllGuests(req, res) {
+  async getMainPage(req, res) {
     try {
       // const guests = await GuestService.getAllGuests();
       // res.json(guests);
