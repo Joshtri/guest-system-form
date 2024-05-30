@@ -3,83 +3,94 @@
     {{!-- <div class="hero-head is-bordered" style="border-color: ;">
 
     </div> --}}
-    
+
     <link rel="stylesheet" href="/css/marquee.css">
-<!-- Sertakan jQuery -->
-<!-- Masukkan jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- Masukkan JSignature -->
-{{!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jSignature/2.1.3/jSignature.min.js"></script> --}}
+    <!-- Sertakan jQuery -->
+    <!-- Masukkan jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Masukkan JSignature -->
+    {{!--
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jSignature/2.1.3/jSignature.min.js"></script> --}}
 
 
-<style>
-    .notification.is-fixed {
-        position: fixed;
-        top: 70px; /* Atur jarak dari bagian atas */
-        left: calc(50% - 300px); /* Atur jarak dari tepi kiri, misalnya notifikasi berlebar 600px */
-        z-index: 1000; /* Pastikan notifikasi muncul di atas elemen lain */
-    }
-
-    /* Media query untuk tampilan mobile */
-    @media only screen and (max-width: 600px) {
+    <style>
         .notification.is-fixed {
-            top: 70px; /* Ubah jarak dari bagian atas untuk tampilan mobile */
-            left: calc(50% - 150px); /* Atur jarak dari tepi kiri untuk tampilan mobile */
-            width: auto; /* Atur lebar notifikasi agar dapat menyesuaikan konten */
-            max-width: 90%; /* Batasi lebar maksimum notifikasi untuk tampilan mobile */
-            
-         
+            position: fixed;
+            top: 70px;
+            /* Atur jarak dari bagian atas */
+            left: calc(50% - 300px);
+            /* Atur jarak dari tepi kiri, misalnya notifikasi berlebar 600px */
+            z-index: 1000;
+            /* Pastikan notifikasi muncul di atas elemen lain */
         }
-    }
-</style>
 
-        {{#each messageSuccessGuest}}
-            <div class="notification is-success mx-auto is-fixed animate__animated animate__fadeInDown" style="width: 600px;">
-                <p><strong>{{this}}</strong></p>
-                <button class="delete" onclick="closeNotification(this)"></button>
+        /* Media query untuk tampilan mobile */
+        @media only screen and (max-width: 600px) {
+            .notification.is-fixed {
+                top: 70px;
+                /* Ubah jarak dari bagian atas untuk tampilan mobile */
+                left: calc(50% - 150px);
+                /* Atur jarak dari tepi kiri untuk tampilan mobile */
+                width: auto;
+                /* Atur lebar notifikasi agar dapat menyesuaikan konten */
+                max-width: 90%;
+                /* Batasi lebar maksimum notifikasi untuk tampilan mobile */
+
+
+            }
+        }
+    </style>
+
+    {{#each messageSuccessGuest}}
+    <div class="notification is-success mx-auto is-fixed animate__animated animate__fadeInDown" style="width: 600px;">
+        <p><strong>{{this}}</strong></p>
+        <button class="delete" onclick="closeNotification(this)"></button>
+    </div>
+    {{/each}}
+
+
+
+
+    <div class="hero-head {{#if darkModeEnabled}}has-background-black{{/if}}">
+        <div class="container is-max-desktop p-3">
+            <!-- Marquee untuk informasi jam kantor -->
+            <div class="marquee-container">
+                <marquee behavior="scroll" direction="left" class="marquee-text is-rounded">Jam kantor: Senin - Jumat,
+                    09:00 - 17:00 WITA</marquee>
             </div>
-        {{/each}}
-
-
-
-
-        <div class="hero-head {{#if darkModeEnabled}}has-background-black{{/if}}">
-            <div class="container is-max-desktop p-3">
-                <!-- Marquee untuk informasi jam kantor -->
-                <div class="marquee-container">
-                    <marquee behavior="scroll" direction="left" class="marquee-text is-rounded">Jam kantor: Senin - Jumat, 09:00 - 17:00 WITA</marquee>
-                </div>
-                <div class="is-centered mb-3 mt-5">
-                    <div class="card">
-                        <div class="card-content">
-                            <div class="content">
-                                <h1 class=" is-3">Selamat Datang</h1>
-                                <hr>
-                        <!-- Ucapan selamat datang -->
-                        <p class="welcome-text">Di pengisian buku tamu online <b>LPPM UNDANA</b>. Kami sangat senang bisa melayani Anda. Harap isi data dengan lengkap dan jangan ragu untuk bertanya jika membutuhkan bantuan.</p>
-                            </div>
+            <div class="is-centered mb-3 mt-5">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="content">
+                            <h1 class=" is-3">Selamat Datang</h1>
+                            <hr>
+                            <!-- Ucapan selamat datang -->
+                            <p class="welcome-text">Di pengisian buku tamu online <b>LPPM UNDANA</b>. Kami sangat senang
+                                bisa melayani Anda. Harap isi data dengan lengkap dan jangan ragu untuk bertanya jika
+                                membutuhkan bantuan.</p>
                         </div>
                     </div>
                 </div>
-
             </div>
+
         </div>
+    </div>
 
- 
 
-        <script>
-            function closeNotification(button) {
-                // Mendapatkan parent dari tombol delete, yaitu notifikasi
-                var notification = button.parentNode;
-                // Menghapus notifikasi
-                notification.remove();
-            }
-        </script>
+
+    <script>
+        function closeNotification(button) {
+            // Mendapatkan parent dari tombol delete, yaitu notifikasi
+            var notification = button.parentNode;
+            // Menghapus notifikasi
+            notification.remove();
+        }
+    </script>
 
 
     <div class="hero-body" style="padding-top: 3rem;">
         <div class="container">
-            
+
             {{!-- <p class="title">Title</p>
             <p class="subtitle">Subtitle</p> --}}
             <div class="columns is-centered is-vcentered">
@@ -88,87 +99,105 @@
                         <div class="card-content">
                             <form id="signature-form" action="/add" method="post" enctype="multipart/form-data">
                                 <div class="field">
-                                    <label class="label">[<i class="mx-1 fa-regular fa-address-card fa-beat" style="color: #dec054;"></i>]-Nama Lengkap</label>
+                                    <label class="label">[<i class="mx-1 fa-regular fa-address-card fa-beat"
+                                            style="color: #dec054;"></i>]-Nama Lengkap</label>
                                     <div class="control">
-                                        <input class="input" type="text" name="nama_lengkap" placeholder="contoh: Andra Fisher">
+                                        <input class="input" type="text" name="nama_lengkap"
+                                            placeholder="contoh: Andra Fisher">
                                     </div>
                                 </div>
                                 <div class="field">
-                                    <label class="label">[<i class="mx-1 fa-solid fa-building" style="color: #ca5858;"></i>]-Asal</label>
+                                    <label class="label">[<i class="mx-1 fa-solid fa-building"
+                                            style="color: #ca5858;"></i>]-Asal</label>
                                     <div class="control">
                                         <input class="input" type="text" name="asal" placeholder="" required>
                                     </div>
-                                    <p class="help has-text-warning-dark">*) tamu mahasiswa mengisi asal fakultas/jurusan/instansi</p>
+                                    <p class="help has-text-warning-dark">*) tamu mahasiswa mengisi asal
+                                        fakultas/jurusan/instansi</p>
                                 </div>
                                 <div class="field">
                                     <label class="label">[<i class="mx-1 fa-solid fa-pen-clip"></i>]-Keperluan</label>
                                     <div class="control">
-                                        <input class="input" type="text" name="keperluan" placeholder="contoh: konsultasi" required>
+                                        <input class="input" type="text" name="keperluan"
+                                            placeholder="contoh: konsultasi" required>
                                     </div>
                                 </div>
                                 <div class="field">
-                                    <label class="label">[<i class="mx-1 fa-solid fa-person" style="color: #3caf6a;"></i>]-Orang Yang dituju</label>
+                                    <label class="label">[<i class="mx-1 fa-solid fa-person"
+                                            style="color: #3caf6a;"></i>]-Orang Yang dituju</label>
                                     <div class="control">
-                                        <input class="input" type="text" name="orang_dituju" placeholder="contoh: Eric Wu">
+                                        <input class="input" type="text" name="orang_dituju"
+                                            placeholder="contoh: Eric Wu">
                                     </div>
                                 </div>
                                 <div class="field">
-                                    <label class="label">[<i class="mx-1 fa-solid fa-square-phone fa-shake" style="color: #74C0FC;"></i>]-No HP</label>
+                                    <label class="label">[<i class="mx-1 fa-solid fa-square-phone fa-shake"
+                                            style="color: #74C0FC;"></i>]-No HP</label>
                                     <div class="control">
-                                        <input class="input" type="text" name="no_hp" placeholder="contoh: 082123456123">
+                                        <input class="input" type="text" name="no_hp"
+                                            placeholder="contoh: 082123456123">
                                     </div>
                                     <p class="help has-text-warning-dark">*) gunakan nomor aktif</p>
                                 </div>
-                                    <!-- Signature Pad -->
+                                <!-- Signature Pad -->
 
-                                    <div class="field">
-                                        <label class="label">[<i class="fa-solid fa-signature mx-1 fa-beat-fade" style="color: #B197FC;"></i>]-Tanda Tangan Digital</label>
-                                        <div class="control">
-                                            {{!-- <input type="file" name="signature_image" class="input" id="signature_image_input" style="display: none;"> --}}
+                                <div class="field">
+                                    <label class="label">[<i class="fa-solid fa-signature mx-1 fa-beat-fade"
+                                            style="color: #B197FC;"></i>]-Tanda Tangan Digital</label>
+                                    <div class="control">
+                                        {{!-- <input type="file" name="signature_image" class="input"
+                                            id="signature_image_input" style="display: none;"> --}}
 
-                                            <div id="signature_image_input" class="file has-name" style="display: none;">
-                                                <label class="file-label">
-                                                    <input class="file-input"  type="file" name="file" />
-                                                    <span class="file-cta">
+                                        <div id="signature_image_input" class="file has-name" style="display: none;">
+                                            <label class="file-label">
+                                                <input class="file-input" type="file" name="file" />
+                                                <span class="file-cta">
                                                     <span class="file-icon">
                                                         <i class="fas fa-upload"></i>
                                                     </span>
                                                     <span class="file-label"> Choose a file… </span>
-                                                    </span>
-                                                    <span class="file-name"> Upload TTD yang sudah diunduh</span>
-                                                </label>
-                                            </div>
-                                            <p class="help has-text-warning-dark" id="signature_img_keterangan" style="display: none;">*) Upload tanda tangan yang telah di unduh pada kolom diatas 👆👆</p> 
+                                                </span>
+                                                <span class="file-name"> Upload TTD yang sudah diunduh</span>
+                                            </label>
+                                        </div>
+                                        <p class="help has-text-warning-dark" id="signature_img_keterangan"
+                                            style="display: none;">*) Upload tanda tangan yang telah di unduh pada kolom
+                                            diatas 👆👆</p>
 
-                                            <script>
+                                        <script>
                                             const fileInput = document.querySelector("#signature_image_input input[type=file]");
                                             fileInput.onchange = () => {
                                                 if (fileInput.files.length > 0) {
-                                                const fileName = document.querySelector("#signature_image_input .file-name");
-                                                fileName.textContent = fileInput.files[0].name;
+                                                    const fileName = document.querySelector("#signature_image_input .file-name");
+                                                    fileName.textContent = fileInput.files[0].name;
                                                 }
                                             };
-                                            </script>
-                                            <!-- Elemen HTML untuk menampung area tanda tangan -->
-                                            <div id="signature"></div>
-                                            
-                                        </div>
+                                        </script>
+                                        <!-- Elemen HTML untuk menampung area tanda tangan -->
+                                        <div id="signature"></div>
+                                        <input type="hidden" name="signature" id="signature-field">
+
                                     </div>
-                                    <!-- Tombol untuk mengkonversi tanda tangan menjadi gambar dan menyimpannya -->
+                                </div>
+                                <!-- Tombol untuk mengkonversi tanda tangan menjadi gambar dan menyimpannya -->
 
 
-                                    <!-- Elemen input untuk menyimpan gambar tanda tangan -->
-                                    {{!-- <input type="hidden" name="file" id="file" required> --}}
+                                <!-- Elemen input untuk menyimpan gambar tanda tangan -->
+                                {{!-- <input type="hidden" name="file" id="file" required> --}}
 
                                 <!-- Input file yang tersembunyi -->
 
 
-                                
-                                    <button type="button" onclick="resetSignature()" class="button is-warning"><i class="fa-solid fa-arrow-rotate-left fa-spin fa-spin-reverse mx-1" style="color: #ba4a4a;"></i>Reset TTD</button>
-                                    <button type="button" onclick="downloadSignature()" class="button is-success" id="downloadBtn" style="display: none;">Unduh TTD</button>
-                               
 
-                                <button type="submit" class="button is-success"><i class="mx-1 fa-solid fa-floppy-disk"></i>Kirim</button>
+                                <button type="button" onclick="resetSignature()" class="button is-warning"><i
+                                        class="fa-solid fa-arrow-rotate-left fa-spin fa-spin-reverse mx-1"
+                                        style="color: #ba4a4a;"></i>Reset TTD</button>
+                                <button type="button" onclick="downloadSignature()" class="button is-success"
+                                    id="downloadBtn" style="display: none;">Unduh TTD</button>
+
+
+                                <button type="submit" class="button is-success"><i
+                                        class="mx-1 fa-solid fa-floppy-disk"></i>Kirim</button>
                             </form>
                         </div>
                     </div>
@@ -178,17 +207,29 @@
     </div>
 
 </section>
- 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jSignature/2.1.3/jSignature.min.js"></script>
-    <script>
-    $(document).ready(function() {
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jSignature/2.1.3/jSignature.min.js"></script>
+<script>
+
+
+    document.getElementById("signature-form").onsubmit = (event) => {
+        const signatureField = document.getElementById("signature-field")
+        const $sigdiv = $("#signature");
+        const datapair = $sigdiv.jSignature("getData", "svg");
+        const svgData = datapair[1];
+        const base64 = btoa(unescape(encodeURIComponent(svgData)))
+        signatureField.value = base64
+
+    }
+
+    $(document).ready(function () {
         $('#signature').jSignature({
             'decor-color': 'transparent',
             'background-color': 'transparent'
         });
 
         // Memunculkan tombol "Unduh TTD" saat pengguna baru menggambar tanda tangan
-        $('#signature').on('change', function() {
+        $('#signature').on('change', function () {
             $('#downloadBtn').show();
         });
     });
@@ -209,7 +250,7 @@
         var ctx = canvas.getContext("2d");
         var img = new Image();
 
-        img.onload = function() {
+        img.onload = function () {
             // Atur ukuran canvas sesuai dengan gambar
             canvas.width = img.width;
             canvas.height = img.height;
@@ -238,7 +279,6 @@
         img.src = "data:image/svg+xml;base64," + btoa(svgData);
     }
 
-    </script>
+</script>
 <!-- Script JavaScript -->
 <script src="/js/darkMode.js"></script>
-
