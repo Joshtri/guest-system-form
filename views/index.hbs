@@ -155,16 +155,6 @@
                                             id="signature_image_input" style="display: none;"> --}}
 
 
-                                        <script>
-                                            const fileInput = document.querySelector("#signature_image_input input[type=file]");
-                                            fileInput.onchange = () => {
-                                                if (fileInput.files.length > 0) {
-                                                    const fileName = document.querySelector("#signature_image_input .file-name");
-                                                    fileName.textContent = fileInput.files[0].name;
-                                                }
-                                            };
-
-                                        </script>
                                         <!-- Elemen HTML untuk menampung area tanda tangan -->
                                         <div id="signature" class="box"></div>
                                         <input type="hidden" name="signature" id="signature-field">

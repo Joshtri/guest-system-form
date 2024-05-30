@@ -86,15 +86,7 @@ const GuestController = {
   },
 
   // Controller untuk mencari tamu berdasarkan ID
-  async findGuestById(req, res) {
-    try {
-      const guestId = req.params.id; // Mendapatkan ID tamu dari URL parameter
-      const guest = await GuestService.findGuestById(guestId);
-      res.json(guest);
-    } catch (error) {
-      res.status(404).json({ error: error.message });
-    }
-  },
+
 
   // Controller untuk mendapatkan semua tamu
   async getMainPage(req, res) {
