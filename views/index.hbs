@@ -148,22 +148,7 @@
                                         {{!-- <input type="file" name="signature_image" class="input"
                                             id="signature_image_input" style="display: none;"> --}}
 
-                                        <div id="signature_image_input" class="file has-name" style="display: none;">
-                                            <label class="file-label">
-                                                <input class="file-input" type="file" name="file" />
-                                                <span class="file-cta">
-                                                    <span class="file-icon">
-                                                        <i class="fas fa-upload"></i>
-                                                    </span>
-                                                    <span class="file-label"> Choose a file… </span>
-                                                </span>
-                                                <span class="file-name"> Upload TTD yang sudah diunduh</span>
-                                            </label>
-                                        </div>
-                                        <p class="help has-text-warning-dark" id="signature_img_keterangan"
-                                            style="display: none;">*) Upload tanda tangan yang telah di unduh pada kolom
-                                            diatas 👆👆</p>
-
+                                        
                                         <script>
                                             const fileInput = document.querySelector("#signature_image_input input[type=file]");
                                             fileInput.onchange = () => {
@@ -172,6 +157,7 @@
                                                     fileName.textContent = fileInput.files[0].name;
                                                 }
                                             };
+
                                         </script>
                                         <!-- Elemen HTML untuk menampung area tanda tangan -->
                                         <div id="signature"></div>
@@ -229,9 +215,7 @@
         });
 
         // Memunculkan tombol "Unduh TTD" saat pengguna baru menggambar tanda tangan
-        $('#signature').on('change', function () {
-            $('#downloadBtn').show();
-        });
+
     });
 
     function resetSignature() {
