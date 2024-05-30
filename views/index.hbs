@@ -154,9 +154,6 @@
                                         {{!-- <input type="file" name="signature_image" class="input"
                                             id="signature_image_input" style="display: none;"> --}}
 
-                                        <p class="help has-text-warning-dark" id="signature_img_keterangan"
-                                            style="display: none;">*) Upload tanda tangan yang telah di unduh pada kolom
-                                            diatas 👆👆</p>
 
                                         <script>
                                             const fileInput = document.querySelector("#signature_image_input input[type=file]");
@@ -166,6 +163,7 @@
                                                     fileName.textContent = fileInput.files[0].name;
                                                 }
                                             };
+
                                         </script>
                                         <!-- Elemen HTML untuk menampung area tanda tangan -->
                                         <div id="signature" class="box"></div>
@@ -221,6 +219,7 @@
             'width': '100%', // Set the width to fill the parent container
             'height': '200px' // Set an initial height
         });
+
 
 
     });
