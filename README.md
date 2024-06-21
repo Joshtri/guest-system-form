@@ -6,7 +6,7 @@ Dengan Buku Tamu Online, proses pendaftaran tamu menjadi lebih cepat dan mudah. 
 
 [![made-with-javascript](https://img.shields.io/badge/Made%20with-JavaScript-1f425f.svg)](https://www.javascript.com)
 
-## 📄 How to Use
+## 📄 Penggunaan
 
 1. **Akses Aplikasi**: Buka browser Anda dan pergi ke [Buku Tamu Online](https://guest-system-form.vercel.app/).
 2. **Mengisi Buku Tamu Online**: Mengisi Form berupa data anda selaku tamu dan melakukan tanda tangan.
