@@ -15,7 +15,7 @@ Dengan Buku Tamu Online, proses pendaftaran tamu menjadi lebih cepat dan mudah. 
 
 - ![Node.js](https://img.shields.io/badge/Node.js-20.13.1-green) 
 - ![Express.js](https://img.shields.io/badge/Express.js-4.19.2-blue)
-- ![Bulma](https://img.shields.io/badge/Bulma-0.9.3-purple)
+- ![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3.3-purple)
 - ![HBS](https://img.shields.io/badge/hbs-TemplateEngine-orange)
 - ![MongoDB](https://img.shields.io/badge/MongoDB-Database-blue)
 
